@@ -25,8 +25,9 @@ export default function Uploader() {
     if (file !== null) {
       const newFormData = new FormData();
 	  const date = new Date();
-	  console.log(date.getTime());
+	  setTimeStamp(date.getTime().toString())
       newFormData.append("file", file);
+	  newFormData.append("timestamp", timeStamp);
       try {
 		const response = await fetch('/api/upload', {
 		  method: 'POST',
@@ -42,7 +43,7 @@ export default function Uploader() {
       setWaiting(true);
       setStartAnalysis(true);
       addExecution(1, 1, "Waiting");
-      fetch("/api/test", { method: "POST" })
+      fetch("/api/test", { method: "POST", body: newFormData})
         .then((response) => response.json())
         .then((result) => {
           console.log("Dati recuperati:", result);
@@ -99,7 +100,7 @@ export default function Uploader() {
           disabled={waiting || !startAnalysis}
           onClick={() =>
             handleDownload(
-              `http://trustalert.hpc4ai.unito.it:8000/prediction.csv`,
+              `http://trustalert.hpc4ai.unito.it:8000/${timeStamp}/prediction.csv`,
               "prediction.csv"
             )
           }
