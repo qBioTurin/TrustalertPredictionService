@@ -6,7 +6,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   const data = await req.formData();
   const file: File | null = data.get("file") as unknown as File;
   const timestamp: string = data.get("timestamp") as unknown as string;
-  console.log("FILE", file);
   if (!file || !timestamp) {
     return NextResponse.json({ error: "No files received." }, { status: 400 });
   }

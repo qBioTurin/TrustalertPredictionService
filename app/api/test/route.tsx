@@ -10,8 +10,8 @@ async function test(timestamp: string) {
 	--file_path /app/public/" +
     name +
     " \
-	--output_folder /app/public/" + timestamp + " \
-	--output_name infer_dataset.txt \
+	--output_folder ./predictionPython/ \
+	--output_name " + timestamp +"_infer_dataset.txt \
 	--create_infer_text_data";
   exec(command, (error, stdout, stderr) => {
     if (error) {
