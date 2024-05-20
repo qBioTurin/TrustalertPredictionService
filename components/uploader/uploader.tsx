@@ -25,9 +25,10 @@ export default function Uploader() {
     if (file !== null) {
       const newFormData = new FormData();
 	  const date = new Date();
-	  setTimeStamp(date.getTime().toString())
+	  const time = date.getTime().toString();
+	  setTimeStamp(time)
       newFormData.append("file", file);
-	  newFormData.append("timestamp", timeStamp);
+	  newFormData.append("timestamp", time);
       try {
 		const response = await fetch('/api/upload', {
 		  method: 'POST',
