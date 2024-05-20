@@ -26,7 +26,7 @@ async function test(timestamp: string) {
   const command2 = "python3 ./predictionPython/run_glue.py \
   --predict \
   --model_input ./predictionPython/finetuned_model \
-  --input_file  /app/public/" + timestamp + "/infer_dataset.txt \
+  --input_file  ./predictionPython/" + timestamp + "_infer_dataset.txt \
   --output_dir /app/public/" + timestamp;
   exec(command2,
     (error, stdout, stderr) => {
