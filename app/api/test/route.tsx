@@ -10,7 +10,7 @@ async function test(timestamp: string) {
 	--file_path /app/public/" +
     name +
     " \
-	--output_folder ./predictionPython/" + timestamp + "/ \
+	--output_folder /app/public/" + timestamp + "/ \
 	--output_name infer_dataset.txt \
 	--create_infer_text_data";
   exec(command, (error, stdout, stderr) => {
@@ -26,7 +26,7 @@ async function test(timestamp: string) {
   const command2 = "python3 ./predictionPython/run_glue.py \
   --predict \
   --model_input ./predictionPython/finetuned_model \
-  --input_file  ./predictionPython/" + timestamp + "/infer_dataset.txt \
+  --input_file  /app/public/" + timestamp + "/infer_dataset.txt \
   --output_dir /app/public/" + timestamp;
   exec(command2,
     (error, stdout, stderr) => {
