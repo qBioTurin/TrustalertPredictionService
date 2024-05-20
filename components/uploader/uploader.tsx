@@ -18,11 +18,14 @@ export default function Uploader() {
     useDownloader();
   const [content, setContent] = useState<string | null>(null);
   const [waiting, setWaiting] = useState<boolean>(false);
+  const [timeStamp, setTimeStamp] = useState<string>("");
   const [startAnalysis, setStartAnalysis] = useState<boolean>(false);
 
   async function prediction() {
     if (file !== null) {
       const newFormData = new FormData();
+	  const date = new Date();
+	  console.log(date.getDate());
       newFormData.append("file", file);
       try {
 		const response = await fetch('/api/upload', {
