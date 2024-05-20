@@ -1,5 +1,6 @@
 "use client";
 import { addExecution, getExecutionStatusByIDs } from "@/lib/actions/Execution";
+import { test } from "@/lib/prova";
 import {
   Button,
   Card,
@@ -22,6 +23,7 @@ export default function Uploader() {
 
   function prediction() {
     if (file !== null) {
+      test(file);
       setWaiting(true);
       setStartAnalysis(true);
       addExecution(1, 1, "Waiting");
@@ -80,7 +82,12 @@ export default function Uploader() {
 
         <Button
           disabled={waiting || !startAnalysis}
-          onClick={() => handleDownload(`http://trustalert.hpc4ai.unito.it:8000/prediction.csv`, "prediction.csv")}
+          onClick={() =>
+            handleDownload(
+              `http://trustalert.hpc4ai.unito.it:8000/prediction.csv`,
+              "prediction.csv"
+            )
+          }
         >
           Download
         </Button>
