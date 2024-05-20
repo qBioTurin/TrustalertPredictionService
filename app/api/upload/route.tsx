@@ -11,7 +11,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   }
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
-  const filePath = path.join(process.cwd(), "public", file.name);
+  const filePath = path.join(process.cwd(), "public", 'input.csv');
 
   try {
     await fs.writeFile(filePath, buffer);

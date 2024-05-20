@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 async function test() {
   exec(
     "python3 ./predictionPython/text_generator.py \
-  --file_path ./predictionPython/base.csv \
+  --file_path /app/public/input.csv \
   --output_folder ./predictionPython/ \
   --output_name infer_dataset.txt \
   --create_infer_text_data",
