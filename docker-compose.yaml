@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15.4
+    restart: always
+    environment:
+      POSTGRES_DB: TRUSTALERTDB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+      - ./postgresql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    #    ports:
+    #      - "5432:5432"
+    networks:
+      - trustalert-network
+
+  interface:
+    image: trustalertinterface
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      DBHOST: postgres
+      POSTGRES_DB: TRUSTALERTDB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - /storage/dockerServiceStorage/:/app/public
+    networks:
+      - trustalert-network
+    ports:
+      - "127.0.0.1:3000:3000"
+
+networks:
+  trustalert-network:
+    driver: bridge
