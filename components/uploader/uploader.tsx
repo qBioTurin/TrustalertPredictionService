@@ -1,6 +1,5 @@
 "use client";
 import { addExecution, getExecutionStatusByIDs } from "@/lib/actions/Execution";
-import { test } from "@/lib/prova";
 import {
   Button,
   Card,
@@ -21,9 +20,22 @@ export default function Uploader() {
   const [waiting, setWaiting] = useState<boolean>(false);
   const [startAnalysis, setStartAnalysis] = useState<boolean>(false);
 
-  function prediction() {
+  async function prediction() {
     if (file !== null) {
-      test(file);
+      const newFormData = new FormData();
+      newFormData.append("file", file);
+      try {
+		const response = await fetch('/api/upload', {
+		  method: 'POST',
+		  body: newFormData,
+		});
+	
+		const result = await response.json();
+		console.log(result);
+	  } catch (error) {
+		console.error('Error uploading files:', error);
+	  }
+
       setWaiting(true);
       setStartAnalysis(true);
       addExecution(1, 1, "Waiting");

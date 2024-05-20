@@ -9,7 +9,7 @@ export async function test(file: File) {
   console.log(filename);
   try {
     await fs.promises.writeFile(
-      path.join(process.cwd(), "public/assets/" + filename),
+      path.join(process.cwd(), "public/" + filename),
       buffer
     );
     return { Message: "Success", status: 201 };
