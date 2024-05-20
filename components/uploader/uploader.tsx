@@ -25,7 +25,7 @@ export default function Uploader() {
     if (file !== null) {
       const newFormData = new FormData();
 	  const date = new Date();
-	  console.log(date.getDate());
+	  console.log(date.getTime());
       newFormData.append("file", file);
       try {
 		const response = await fetch('/api/upload', {
