@@ -58,8 +58,9 @@ export default function Uploader() {
       const interval = setInterval(async function () {
         const status = await getExecutionStatusByIDs(1, time);
         if (status === "Finished") {
-          clearInterval(interval);
           setWaitingTime(100);
+          clearInterval(interval);
+		  await new Promise(resolve => setTimeout(resolve, 2000));
           setWaiting(false);
         } else if (status === "Step 1") {
           setWaitingTime(50);
@@ -95,7 +96,7 @@ export default function Uploader() {
             Prediction
           </Button>
         </Group>
-        {waiting && <Progress size="lg" value={waitingTime} striped animated />}
+        {waiting && <Progress style={{marginTop: "4%"}} size="lg" value={waitingTime} striped animated />}
       </Card>
 
       <Card
