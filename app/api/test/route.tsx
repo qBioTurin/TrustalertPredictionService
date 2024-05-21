@@ -11,34 +11,38 @@ async function test(timestamp: string) {
     name +
     " \
 	--output_folder ./predictionPython/ \
-	--output_name " + timestamp +"_infer_dataset.txt \
+	--output_name " +
+    timestamp +
+    "_infer_dataset.txt \
 	--create_infer_text_data";
   exec(command, (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
       return "e";
     }
-    updateExecutionStatus(1, 1, "Step 1");
+    updateExecutionStatus(1, Number(timestamp), "Step 1");
     console.log(`stdout: ${stdout}`);
     console.error(`stderr: ${stderr}`);
   });
 
-  const command2 = "python3 ./predictionPython/run_glue.py \
+  const command2 =
+    "python3 ./predictionPython/run_glue.py \
   --predict \
   --model_input ./predictionPython/finetuned_model \
-  --input_file  ./predictionPython/" + timestamp + "_infer_dataset.txt \
-  --output_dir /app/public/" + timestamp;
-  exec(command2,
-    (error, stdout, stderr) => {
-      if (error) {
-        console.error(`exec error: ${error}`);
-        return "e";
-      }
-      updateExecutionStatus(1, 1, "Finished");
-      console.log(`stdout: ${stdout}`);
-      console.error(`stderr: ${stderr}`);
+  --input_file  ./predictionPython/" +
+    timestamp +
+    "_infer_dataset.txt \
+  --output_dir /app/public/" +
+    timestamp;
+  exec(command2, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return "e";
     }
-  );
+    updateExecutionStatus(1, Number(timestamp), "Finished");
+    console.log(`stdout: ${stdout}`);
+    console.error(`stderr: ${stderr}`);
+  });
 }
 
 export async function POST(req: NextRequest, res: NextResponse) {

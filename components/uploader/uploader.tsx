@@ -43,7 +43,7 @@ export default function Uploader() {
 
       setWaiting(true);
       setStartAnalysis(true);
-      addExecution(1, 1, "Waiting");
+      addExecution(1, Number(time), "Waiting");
       fetch("/api/test", { method: "POST", body: newFormData})
         .then((response) => response.json())
         .then((result) => {
@@ -72,15 +72,18 @@ export default function Uploader() {
       <Card shadow="sm" padding="lg" radius="md" withBorder>
         <Title order={1}>Hospitalization Prediction</Title>
         <p>
-          Get an estimate of the probability of hospitalization for a patient.
+          Get an estimate of the probability of hospitalization for a patient. 
         </p>
+		<p>
+			Try with your own data or download the sample file from <a href="https://shorturl.at/8YY0v">here</a>.
+		</p>
 
         <Group justify="center">
           <TextInput disabled placeholder={file?.name} />
           <FileButton onChange={setFile} accept="text/csv">
             {(props) => <Button {...props}>Upload CSV file</Button>}
           </FileButton>
-          <Button disabled={file === null} onClick={prediction}>
+          <Button disabled={file === null || waiting} onClick={prediction}>
             Prediction
           </Button>
         </Group>
