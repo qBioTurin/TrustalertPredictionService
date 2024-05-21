@@ -2,7 +2,7 @@ import { QueryResult } from "pg";
 import pool from "./db";
 import { Execution } from "../model/Execution";
 
-export async function _addExecution(personid: number, taskid: number, status: String): Promise<void> {
+export async function _addExecution(personid: number, taskid: String, status: String): Promise<void> {
 	try {
 	  await pool.query(
 		"INSERT INTO execution (personid, taskid, status) VALUES ($1, $2, $3)",
@@ -14,7 +14,7 @@ export async function _addExecution(personid: number, taskid: number, status: St
 	}
   }
 
-  export async function _updateExecutionStatus(personid: number, taskid: number, status: String): Promise<void> {
+  export async function _updateExecutionStatus(personid: number, taskid: String, status: String): Promise<void> {
 	try {
 	  await pool.query(
 		"UPDATE execution SET status = $3 WHERE taskid = $2 and personid = $1",
@@ -27,7 +27,7 @@ export async function _addExecution(personid: number, taskid: number, status: St
   }
 
 
-export async function _getExecutionStatusByIDs(personid: number, taskid: number): Promise<String> {
+export async function _getExecutionStatusByIDs(personid: number, taskid: String): Promise<String> {
 	try {
 	  const result: QueryResult<Execution> = await pool.query(
 		"SELECT * FROM execution WHERE taskid = $1 and personid = $2",

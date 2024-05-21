@@ -1,5 +1,5 @@
 export interface Execution {
   personid: number;
-  taskid: number;
+  taskid: String;
   status: String;
 }

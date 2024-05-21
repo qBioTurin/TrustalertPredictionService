@@ -43,7 +43,7 @@ export default function Uploader() {
 
       setWaiting(true);
       setStartAnalysis(true);
-      addExecution(1, Number(time), "Waiting");
+      addExecution(1, time, "Waiting");
       fetch("/api/test", { method: "POST", body: newFormData})
         .then((response) => response.json())
         .then((result) => {
@@ -54,7 +54,7 @@ export default function Uploader() {
         });
 
       const interval = setInterval(async function () {
-        const status = await getExecutionStatusByIDs(1, 1);
+        const status = await getExecutionStatusByIDs(1, time);
         if (status === "Finished") {
           clearInterval(interval);
           setWaiting(false);

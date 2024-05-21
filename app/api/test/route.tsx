@@ -20,7 +20,7 @@ async function test(timestamp: string) {
       console.error(`exec error: ${error}`);
       return "e";
     }
-    updateExecutionStatus(1, Number(timestamp), "Step 1");
+    updateExecutionStatus(1, timestamp, "Step 1");
     console.log(`stdout: ${stdout}`);
     console.error(`stderr: ${stderr}`);
   });
@@ -39,7 +39,7 @@ async function test(timestamp: string) {
       console.error(`exec error: ${error}`);
       return "e";
     }
-    updateExecutionStatus(1, Number(timestamp), "Finished");
+    updateExecutionStatus(1, timestamp, "Finished");
     console.log(`stdout: ${stdout}`);
     console.error(`stderr: ${stderr}`);
   });
