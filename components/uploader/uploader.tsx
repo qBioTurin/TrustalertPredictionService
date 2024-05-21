@@ -6,6 +6,7 @@ import {
   FileButton,
   Group,
   Loader,
+  Progress,
   TextInput,
   Title,
 } from "@mantine/core";
@@ -20,31 +21,32 @@ export default function Uploader() {
   const [waiting, setWaiting] = useState<boolean>(false);
   const [timeStamp, setTimeStamp] = useState<string>("");
   const [startAnalysis, setStartAnalysis] = useState<boolean>(false);
+  const [waitingTime, setWaitingTime] = useState<number>(0);
 
   async function prediction() {
     if (file !== null) {
       const newFormData = new FormData();
-	  const date = new Date();
-	  const time = date.getTime().toString();
-	  setTimeStamp(time)
+      const date = new Date();
+      const time = date.getTime().toString();
+      setTimeStamp(time);
       newFormData.append("file", file);
-	  newFormData.append("timestamp", time);
+      newFormData.append("timestamp", time);
       try {
-		const response = await fetch('/api/upload', {
-		  method: 'POST',
-		  body: newFormData,
-		});
-	
-		const result = await response.json();
-		console.log(result);
-	  } catch (error) {
-		console.error('Error uploading files:', error);
-	  }
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: newFormData,
+        });
+
+        const result = await response.json();
+        console.log(result);
+      } catch (error) {
+        console.error("Error uploading files:", error);
+      }
 
       setWaiting(true);
       setStartAnalysis(true);
       addExecution(1, time, "Waiting");
-      fetch("/api/test", { method: "POST", body: newFormData})
+      fetch("/api/test", { method: "POST", body: newFormData })
         .then((response) => response.json())
         .then((result) => {
           console.log("Dati recuperati:", result);
@@ -57,7 +59,12 @@ export default function Uploader() {
         const status = await getExecutionStatusByIDs(1, time);
         if (status === "Finished") {
           clearInterval(interval);
+          setWaitingTime(100);
           setWaiting(false);
+        } else if (status === "Step 1") {
+          setWaitingTime(50);
+        } else if (status === "Waiting") {
+          setWaitingTime(25);
         }
       }, 3000);
     }
@@ -72,11 +79,12 @@ export default function Uploader() {
       <Card shadow="sm" padding="lg" radius="md" withBorder>
         <Title order={1}>Hospitalization Prediction</Title>
         <p>
-          Get an estimate of the probability of hospitalization for a patient. 
+          Get an estimate of the probability of hospitalization for a patient.
         </p>
-		<p>
-			Try with your own data or download the sample file from <a href="https://shorturl.at/8YY0v">here</a>.
-		</p>
+        <p>
+          Try with your own data or download the sample file from{" "}
+          <a href="https://shorturl.at/8YY0v">here</a>.
+        </p>
 
         <Group justify="center">
           <TextInput disabled placeholder={file?.name} />
@@ -87,7 +95,7 @@ export default function Uploader() {
             Prediction
           </Button>
         </Group>
-        {waiting && <Loader color="blue" />}
+        {waiting && <Progress size="lg" value={waitingTime} striped animated />}
       </Card>
 
       <Card
