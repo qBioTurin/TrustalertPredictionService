@@ -78,7 +78,7 @@ export default function Uploader() {
   return (
     <div style={{ paddingLeft: "10%", paddingRight: "10%" }}>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
-        <Title order={1}>Hospitalization Prediction</Title>
+        <Title order={1}>PHeP - Healthcare Predictive System</Title>
         <p>
           Get an estimate of the probability of hospitalization for a patient.
         </p>
