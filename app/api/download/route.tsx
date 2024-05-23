@@ -5,7 +5,6 @@ import path from "path";
 
 export async function GET(request: NextRequest) {
   const filePath = path.join("app", "public", "prediction.csv");
-  console.log("AASD", filePath);
   try {
     const fileContent = await fs.promises.readFile(filePath);
     console.log(fileContent);

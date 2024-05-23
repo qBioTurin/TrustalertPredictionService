@@ -45,6 +45,7 @@ export default function Uploader() {
 
       setWaiting(true);
       setStartAnalysis(true);
+	  setWaitingTime(0);
       addExecution(1, time, "Waiting");
       fetch("/api/test", { method: "POST", body: newFormData })
         .then((response) => response.json())
@@ -84,7 +85,7 @@ export default function Uploader() {
         </p>
         <p>
           Try with your own data or download the sample file from{" "}
-          <a href="https://shorturl.at/8YY0v">here</a>.
+          <a href="https://shorturl.at/xaecv">here</a>.
         </p>
 
         <Group justify="center">
