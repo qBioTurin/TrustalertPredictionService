@@ -45,8 +45,6 @@ services:
       - storage-volume:/app/storage
     networks:
       - trustalert-network
-    ports:
-      - "3001:3001"
 
 volumes:
   storage-volume:

@@ -13,6 +13,23 @@ export default function AppShellLayout({
 }) {
   const [opened, { toggle }] = useDisclosure();
 
+  const pages = [
+    { name: "Home", url: "/" },
+    { name: "Model Info", url: "/model-info" },
+  ];
+
+  const links_desktop = pages.map((page, index) => (
+    <Link key={index} className={classes.link_desktop} href={page.url}>
+      {page.name}
+    </Link>
+  ));
+
+  const links_mobile = pages.map((page, index) => (
+    <Link key={index} className={classes.link} href={page.url} onClick={toggle}>
+      <span>{page.name}</span>
+    </Link>
+  ));
+
   return (
     <AppShell
       styles={{
@@ -29,11 +46,7 @@ export default function AppShellLayout({
       padding="md"
     >
       <AppShell.Header>
-        <Group
-          h="100%"
-          px="md"
-          style={{ marginLeft: "3%", marginRight: "3%" }}
-        >
+        <Group h="100%" px="md" style={{ marginLeft: "3%", marginRight: "3%" }}>
           <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
           <Group justify="space-between" style={{ flex: 1 }}>
             <Title style={{ color: "#03a8f4" }} order={5}>
@@ -46,18 +59,14 @@ export default function AppShellLayout({
               <Image src={logo} alt="logo" />
             </Group>
             <Group ml="xl" gap={0} visibleFrom="md">
-              <Link className={classes.link_desktop} href={"/"}>
-                Home
-              </Link>
+              {links_desktop}
             </Group>
           </Group>
         </Group>
       </AppShell.Header>
 
       <AppShell.Navbar py="lg" px={4}>
-        <Link className={classes.link} href={"/"}>
-          <span>Home</span>
-        </Link>
+        {links_mobile}
       </AppShell.Navbar>
 
       <AppShell.Main>{children}</AppShell.Main>
