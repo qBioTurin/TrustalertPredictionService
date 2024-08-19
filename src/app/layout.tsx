@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
-import { AppShellLayout } from "@/components/app-shell/appShellLayout";
+import AppShellLayout from "@/components/app-shell/app-shell";
 
 const inter = Inter({ subsets: ["latin"] });
 

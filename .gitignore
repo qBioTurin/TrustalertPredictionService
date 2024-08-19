@@ -35,5 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-postgresql/data
-/predictionPython/finetuned_model
+/models
+/bert_medical_records

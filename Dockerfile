@@ -3,19 +3,14 @@ FROM node:21-bookworm AS builder
 
 WORKDIR /Trustalert-prediction-interface
 
-# Aggiorna e installa 'at'
 RUN apt update
 
-# Copia solo i file necessari per l'installazione delle dipendenze
 COPY package.json ./
 
-# Installa dipendenze e pulisce la cache per ridurre la dimensione dell'immagine
-RUN npm i --production && npm cache clean --force
+RUN npm install
 
 # Copia il resto del codice sorgente
-COPY . /tmp
-RUN rm -rf /tmp/node_modules
-RUN mv /tmp/* .
+COPY . .
 
 # Costruisce l'applicazione
 RUN npm run build
@@ -38,9 +33,9 @@ RUN make install
 
 WORKDIR /app
 
-COPY ./predictionPython ./predictionPython
+COPY ./bert_medical_records ./bert_medical_records
 
-RUN pip3 install -r ./predictionPython/requirements.txt
+RUN pip3 install -r ./bert_medical_records/requirements.txt
 
 # Copia solo i file necessari dall'immagine di costruzione
 COPY --from=builder /Trustalert-prediction-interface/node_modules ./node_modules

@@ -1,12 +1,16 @@
 "use client";
 import { AppShell, Burger, Group, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import classes from "./appShellLayout.module.css";
 import Link from "next/link";
 import logo from "@/assets/logo.png";
+import classes from "./app-shell.module.css";
 import Image from "next/image";
 
-export function AppShellLayout({ children }: { children: React.ReactNode }) {
+export default function AppShellLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [opened, { toggle }] = useDisclosure();
 
   return (
@@ -25,14 +29,22 @@ export function AppShellLayout({ children }: { children: React.ReactNode }) {
       padding="md"
     >
       <AppShell.Header>
-        <Group h="100%" px="md" style={{marginLeft: "15%", marginRight: "15%"}}>
+        <Group
+          h="100%"
+          px="md"
+          style={{ marginLeft: "3%", marginRight: "3%" }}
+        >
           <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
           <Group justify="space-between" style={{ flex: 1 }}>
-            <Title style={{ color: "#03a8f4" }} order={5}>Trust Alert</Title>
-			<Group justify="space-between" visibleFrom="md">
-			<Title style={{ color: "#12688d" }} order={4} ta="center">TrustAlert is a project <br/> funded by</Title>
-			<Image src={logo} alt="logo" />
-			</Group>
+            <Title style={{ color: "#03a8f4" }} order={5}>
+              Trust Alert
+            </Title>
+            <Group justify="space-between" visibleFrom="md">
+              <Title style={{ color: "#12688d" }} order={4} ta="center">
+                TrustAlert is a project <br /> funded by
+              </Title>
+              <Image src={logo} alt="logo" />
+            </Group>
             <Group ml="xl" gap={0} visibleFrom="md">
               <Link className={classes.link_desktop} href={"/"}>
                 Home
@@ -41,6 +53,7 @@ export function AppShellLayout({ children }: { children: React.ReactNode }) {
           </Group>
         </Group>
       </AppShell.Header>
+
       <AppShell.Navbar py="lg" px={4}>
         <Link className={classes.link} href={"/"}>
           <span>Home</span>

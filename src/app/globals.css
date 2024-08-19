@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #c1dae7;
+}
+
+html {
+  height: 100%;
+}
+
+main {
+  text-align: center;
+  margin-bottom: 10rex;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #252d29;
+}

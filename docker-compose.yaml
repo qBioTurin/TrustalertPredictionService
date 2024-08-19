@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   postgres:
     image: postgres:15.4
@@ -14,15 +12,14 @@ services:
         max-size: 10m
         max-file: "3"
     volumes:
-      - ./postgresql/data:/var/lib/postgresql/data
       - ./postgresql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-    #    ports:
-    #      - "5432:5432"
     networks:
       - trustalert-network
 
   interface:
-    image: trustalertinterface
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: always
     depends_on:
       - postgres
@@ -32,11 +29,27 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-      - /storage/dockerServiceStorage/:/app/public
+      - storage-volume:/app/storage
+      - ./models:/app/models
     networks:
       - trustalert-network
     ports:
       - "3000:3000"
+
+  download-server:
+    build:
+      context: ./download_server
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - storage-volume:/app/storage
+    networks:
+      - trustalert-network
+    ports:
+      - "3001:3001"
+
+volumes:
+  storage-volume:
 
 networks:
   trustalert-network:
