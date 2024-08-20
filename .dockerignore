@@ -1,6 +1,4 @@
-/download_server/Dockerfile
-/download_server/package.json
-/download_server/server.json
+/download_server
 /models
 /node_modules
 docker-compose.yml

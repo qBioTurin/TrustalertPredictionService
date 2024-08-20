@@ -5,16 +5,7 @@ import path from "path";
 import axios from "axios";
 
 export async function getFile(timestamp: string): Promise<string> {
-  const certificate = fs.readFileSync(
-    path.resolve(`${process.cwd()}/sslcert/server.crt`)
-  );
-  const privateKey = fs.readFileSync(
-    path.resolve(`${process.cwd()}/sslcert/server.key`)
-  );
-
   const httpsAgent = new https.Agent({
-    key: privateKey,
-    cert: certificate,
     rejectUnauthorized: false,
   });
 

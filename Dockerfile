@@ -36,7 +36,6 @@ WORKDIR /app
 COPY ./bert_medical_records ./bert_medical_records
 
 RUN pip3 install -r ./bert_medical_records/requirements.txt
-COPY download_server/sslcert /app/sslcert
 
 # Copia solo i file necessari dall'immagine di costruzione
 COPY --from=builder /Trustalert-prediction-interface/node_modules ./node_modules
