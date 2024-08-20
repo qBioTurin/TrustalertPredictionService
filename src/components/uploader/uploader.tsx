@@ -105,7 +105,7 @@ export default function Uploader() {
           disabled={waiting || !checkAnalysis}
           onClick={() =>
             handleDownload(
-              `http://download-server:3001/download/${timeStamp}`,
+              `https://download-server:8443/download/${timeStamp}`,
               "prediction.csv"
             )
           }
