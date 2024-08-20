@@ -7,7 +7,7 @@ RUN npm install
 
 COPY ./ .
 
-EXPOSE 3001
+EXPOSE 8443
 
 COPY server.js ./server.js
 
