@@ -5,7 +5,6 @@ import { _addExecution, _getExecutionStatusByTaskID } from "@/lib/db/execution";
 import { uploadFile } from "@/lib/upload-file";
 import { Button, Card, FileInput, Group, Progress, Title } from "@mantine/core";
 import { useState } from "react";
-import useDownloader from "react-use-downloader";
 import fileDownload from "js-file-download";
 import { getFile } from "@/lib/download-file";
 
@@ -17,9 +16,6 @@ export default function Uploader() {
   const [checkAnalysis, setCheckAnalysis] = useState<boolean>(false);
 
   const [timeStamp, setTimeStamp] = useState<string>("");
-
-  const { size, elapsed, percentage, download, cancel, error, isInProgress } =
-    useDownloader();
 
   async function prediction() {
     if (!file) return;
