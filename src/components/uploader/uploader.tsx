@@ -101,12 +101,7 @@ export default function Uploader() {
 
         <Button
           disabled={waiting || !checkAnalysis}
-          onClick={() =>
-            handleDownload(
-              `https://download-server:8443/download/${timeStamp}`,
-              "prediction.csv"
-            )
-          }
+          onClick={() => handleDownload(timeStamp, "prediction.csv")}
         >
           Download
         </Button>

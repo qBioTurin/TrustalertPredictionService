@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 import axios from "axios";
 
-export async function getFile(url: string): Promise<string> {
+export async function getFile(timestamp: string): Promise<string> {
   const certificate = fs.readFileSync(
     path.resolve(`${process.cwd()}/sslcert/server.crt`)
   );
@@ -19,7 +19,7 @@ export async function getFile(url: string): Promise<string> {
   });
 
   return axios
-    .get(url, { httpsAgent })
+    .get(`https://download-server:8443/download/${timestamp}`, { httpsAgent })
     .then((response) => {
       return response.data;
     })
