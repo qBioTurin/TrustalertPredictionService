@@ -1,7 +1,5 @@
 "use server";
 import https from "https";
-import fs from "fs";
-import path from "path";
 import axios from "axios";
 
 export async function getFile(timestamp: string): Promise<string> {
