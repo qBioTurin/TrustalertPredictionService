@@ -6,6 +6,8 @@ import { uploadFile } from "@/lib/upload-file";
 import { Button, Card, FileInput, Group, Progress, Title } from "@mantine/core";
 import { useState } from "react";
 import useDownloader from "react-use-downloader";
+import fileDownload from "js-file-download";
+import { getFile } from "@/lib/download-file";
 
 export default function Uploader() {
   const [file, setFile] = useState<File | null>(null);
@@ -30,11 +32,11 @@ export default function Uploader() {
     formData.append("file", file);
     formData.append("timestamp", time);
 
-    await uploadFile(formData);
-
     setWaitingTime(0);
     setWaiting(true);
-	setCheckAnalysis(true);
+    setCheckAnalysis(true);
+
+    await uploadFile(formData);
 
     await _addExecution(time, "Waiting");
     await startAnalysis(time);
@@ -54,9 +56,9 @@ export default function Uploader() {
     }, 3000);
   }
 
-  const handleDownload = (url: string, filename: string) => {
-    download(url, filename);
-  };
+  async function handleDownload(url: string, filename: string) {
+    fileDownload(await getFile(url), filename);
+  }
 
   return (
     <div style={{ paddingLeft: "10%", paddingRight: "10%" }}>
