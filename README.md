@@ -38,4 +38,4 @@ This is a Next.js application designed to predict if a patient will be hospitali
 
 ## Acknowledgements
 This work is part of the TrustAlert project, which was supported by the Fondazione Compagnia San Paolo and Fondazione CDP under the “Artificial Intelligence” call.
-HPC4AI (\url{https://hpc4ai.unito.it}) was set up thanks to an initial investment of 4.5M€ from a competitive funding call from the Piedmont Region via EU POR-FESR 2014-2020.
+HPC4AI https://hpc4ai.unito.it was set up thanks to an initial investment of 4.5M€ from a competitive funding call from the Piedmont Region via EU POR-FESR 2014-2020.
